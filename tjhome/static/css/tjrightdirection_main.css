@@ -200,7 +200,7 @@ div.gallery_image {
     padding: 0;
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 95%;
+    background-size: contain;
     overflow-x: hidden;
 }
 

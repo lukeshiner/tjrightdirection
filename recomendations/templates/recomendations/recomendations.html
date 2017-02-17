@@ -1,0 +1,14 @@
+{% extends "tjhome/base.html" %}
+
+{% block content %}
+<div class="page_header">
+    <p>Contact details for referees available upon request.</p>
+</div>
+    {% for recomendation in recomendations %}
+        <div class="rec_quote">
+            {{ recomendation.text|linebreaks }}
+            <p class="rec_name">&mdash;&nbsp;{{ recomendation.name }}</p>
+            <p class="rec_name">{{ recomendation.address }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}

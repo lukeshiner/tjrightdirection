@@ -20,6 +20,9 @@ class GalleryImage(models.Model):
     image_size = 800
     thumb_size = 200
 
+    class Meta:
+        ordering = ('order',)
+
     def __str__(self):
         return self.image.name
 
@@ -29,8 +32,13 @@ class GalleryImage(models.Model):
     def thumb_filename(self):
         return os.path.basename(self.thumbnail.name)
 
-    class Meta:
-        ordering = ('order',)
+    def image_tag(self, height='', width=''):
+        return '<img src="{}" height="{}" width="{}"/>'.format(
+            self.image.url, height, width)
+
+    def thumb_tag(self, height='', width=''):
+        return '<img src="{}" height="{}" width="{}"/>'.format(
+            self.thumbnail.url, height, width)
 
     def save(self, *args, **kwargs):
         image = Image.open(self.image)

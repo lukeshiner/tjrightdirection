@@ -1,0 +1,19 @@
+{% extends "tjhome/base.html" %}
+
+{% block content %}
+    <div id="gallery" class="gallery">
+        {% for image in gallery_images %}
+            <div class="gallery_image" style="width: {{ image.thumb_width }}px; height: {{ image.thumb_height }}px;"></div>
+        {% endfor %}
+    </div>
+    <script>
+    thumbPath = "{{ MEDIA_URL }}gallery/thumbs/";
+    fullPath = "{{ MEDIA_URL }}gallery/images/";
+    imageList = [
+        {% for image in gallery_images %}
+            "{{ image.filename }}",
+        {% endfor %}
+    ];
+</script>
+<script src="{{ STATIC_URL }}scripts/gallery.js"></script>
+{% endblock %}

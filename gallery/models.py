@@ -12,11 +12,12 @@ from PIL import Image
 class GalleryImage(models.Model):
     image = models.ImageField(upload_to='gallery/images')
     thumbnail = models.ImageField(upload_to='gallery/thumbs', editable=False)
-    width = models.IntegerField(editable=False, blank=True, null=True)
-    height = models.IntegerField(editable=False, blank=True, null=True)
-    thumb_width = models.IntegerField(editable=False, blank=True, null=True)
-    thumb_height = models.IntegerField(editable=False, blank=True, null=True)
-    order = models.PositiveIntegerField(default=0, blank=False, null=False)
+    width = models.IntegerField(editable=False)
+    height = models.IntegerField(editable=False)
+    thumb_width = models.IntegerField(editable=False)
+    thumb_height = models.IntegerField(editable=False)
+    order = models.PositiveIntegerField(default=0)
+    image_size = 800
     thumb_size = 200
 
     def __str__(self):
@@ -35,6 +36,8 @@ class GalleryImage(models.Model):
         image = Image.open(self.image)
         self.width, self.height = image.size
         self.make_thumbnail(image)
+        image = Image.open(self.image)
+        self.make_fullsize_image(image)
         super(GalleryImage, self).save(*args, **kwargs)
 
     def get_thumb_size(self, image):
@@ -42,31 +45,49 @@ class GalleryImage(models.Model):
         if original_width > original_height:
             return (self.thumb_size, self.thumb_size)
         down_size_ratio = original_width / self.thumb_size
-        adjusted_thumb_size = int(original_height / down_size_ratio)
-        return (adjusted_thumb_size, adjusted_thumb_size)
+        adjusted_size = int(original_height / down_size_ratio)
+        return (adjusted_size, adjusted_size)
 
-    def save_image(self, thumb_image):
-        name, extension = os.path.splitext(self.image.name)
+    def get_full_size(self, image):
+        original_width, original_height = image.size
+        if original_height <= self.image_size:
+            return (original_width, original_height)
+        down_size_ratio = original_height / self.image_size
+        adjusted_width = int(original_width / down_size_ratio)
+        adjusted_height = int(original_height / down_size_ratio)
+        return (adjusted_width, adjusted_height)
+
+    def save_image(
+            self, image, original_filename, target_field,
+            filename_template='{}{}'):
+        name, extension = os.path.splitext(original_filename)
         extension = extension.lower()
-        filename = 'thumb_{}{}'.format(name, extension)
+        filename = filename_template.format(name, extension)
         if extension in ('.jpg', '.jpeg'):
             file_type = 'JPEG'
-        elif extension == '.gif':
-            file_type = 'GIF'
         elif extension == '.png':
             file_type = 'PNG'
         else:
             raise Exception('File type not recognised: {}'.format(extension))
         temp_handle = BytesIO()
-        thumb_image.save(temp_handle, file_type)
+        image.save(temp_handle, file_type, optimize=True, quality=85)
         temp_handle.seek(0)
         uploaded_file = SimpleUploadedFile(
             name, temp_handle.read(),
             content_type='image/{}'.format(extension[1:]))
-        self.thumbnail.save(filename, uploaded_file, save=False)
-        self.thumb_width, self.thumb_height = thumb_image.size
+        target_field.save(filename, uploaded_file, save=False)
         temp_handle.close()
 
     def make_thumbnail(self, image):
-        image.thumbnail(self.get_thumb_size(image), Image.ANTIALIAS)
-        self.save_thumbnail(image)
+        image.thumbnail(
+            self.get_thumb_size(image), Image.ANTIALIAS)
+        self.thumb_width, self.thumb_height = image.size
+        self.save_image(
+            image, self.image.name, self.thumbnail,
+            filename_template='thumb_{}{}')
+
+    def make_fullsize_image(self, image):
+        resized_image = image.resize(
+            self.get_full_size(image), Image.ANTIALIAS)
+        self.width, self.height = resized_image.size
+        self.save_image(resized_image, self.image.name, self.image)

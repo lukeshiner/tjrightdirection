@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}css/tjrightdirection_main.css">
     <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
     <meta name="norton-safeweb-site-verification" content="p390p073ffr7rou81-zvf81stmuxq9vuux8gdj06kh72enwq3sd0chc8agw09cy-n56xmsw97f77eld7siu0as1io68ki4c1d3jaol24j7msrulyei66fhqml-1gthyj" />
+    {% block additional_head %}
+    {% endblock %}
 </head>
 <body>
     <div id="container">
@@ -30,7 +32,7 @@
                 <a href="{% url 'tjhome:index' %}" class="nav"><li class="nav"><img src="{{ STATIC_URL }}images/home.png" alt="Home" height="30"></li></a>
                 <a href="{% url 'gallery:gallery' %}" class="nav"><li class="nav">Gallery</li></a>
                 <a href="{% url 'recomendations:recomendations' %}" class="nav"><li class="nav">Recommendations</li></a>
-                <a href="contact.php" class="nav"><li class="nav">Contact Us</li></a>
+                <a href="{% url 'contact:contact' %}" class="nav"><li class="nav">Contact Us</li></a>
             </ul>
         </div>
         <div id="body">

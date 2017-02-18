@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'tjhome',
     'gallery',
     'recomendations',
+    'contact',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,55 @@
+.contact_form {
+	max-width: 800px;
+    background: white;
+    border: solid 5px #889FCF;
+    padding: 1.5em;
+    margin: 0 auto;
+    margin-bottom: 2em;
+    border-radius: 20px;
+	 vertical-align: middle;
+}
+
+.contact_form th {
+	text-align: center;
+}
+
+.contact_form td, .contact_form th {
+	padding: 0.5em;
+	vertical-align: top;
+}
+
+.contact_form input, .contact_form textarea {
+	padding: 1em;
+	border-radius: 1em;
+	border: 2px solid #555;
+	width: 100%;
+}
+
+.contact_form button {
+	padding: 1em;
+	text-align: center;
+	width: 100%;
+	font-weight: bold;
+}
+
+.status_message {
+	margin: 0 auto;
+	padding: 1em;
+	border-radius: 1em;
+	border: 2px solid #555;
+	background: white;
+	width: 25%;
+	text-align: center;
+}
+
+.status_message .success {
+	color: green;
+}
+
+.status_message .failed {
+	color: red;
+}
+
+.errorlist {
+	color: red;
+}

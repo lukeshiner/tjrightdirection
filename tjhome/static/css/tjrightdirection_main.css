@@ -218,7 +218,7 @@ div.gallery_image {
     padding: 1em;
 }
 
-.rec_quote, #contact_form {
+.rec_quote {
     max-width: 800px;
     background: white;
     border: solid 5px #889FCF;
@@ -230,10 +230,6 @@ div.gallery_image {
 
 .rec_quote {
   font-style: italic;
-}
-
-#contact_form {
-   vertical-align: middle;
 }
 
 .rec_name {
@@ -253,6 +249,7 @@ div.gallery_image {
     overflow: hidden;
     border-radius: 20px;
     margin-bottom: 1em;
+    padding: 1em;
 }
 
 #contact_form textarea {

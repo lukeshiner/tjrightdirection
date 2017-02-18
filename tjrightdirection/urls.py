@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^gallery', include('gallery.urls')),
     url(r'^recomendations', include('recomendations.urls')),
+    url(r'^contact', include('contact.urls')),
     url(r'^', include('tjhome.urls')),
 ]
 

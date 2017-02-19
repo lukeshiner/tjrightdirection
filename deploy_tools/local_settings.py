@@ -1,0 +1,19 @@
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'HOST': 'SET_DATABSE_HOST',
+        'NAME': 'SET_DATABASE_NAME',
+        'TEST_NAME': 'SET_TEST_DATABSE_NAME',
+        'USER': 'SET_DATABASE_USER',
+        'PASSWORD': 'SET_DATABASE_PASSWORD',
+        'PORT': '5432',
+    }
+}
+
+DEBUG = False
+
+EMAIL_HOST = 'SET_EMAIL_HOST'
+EMAIL_HOST_USER = 'SET_EMAIL_USER'
+EMAIL_HOST_PASSWORD = 'SET_EMAIL_PASSWORD'
+EMAIL_PORT = 'SET_EMAIL_PORT'
+EMAIL_USE_TLS = True

@@ -1,0 +1,28 @@
+{% extends "tjhome/base.html" %}
+
+{% block additional_head %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/contact.css">
+{% endblock %}
+
+{% block content %}
+    <p class="page_header">
+        To get in touch please call us on the number above, email us at
+        <a href="mailto:info@tjrightdirection.co.uk">
+            info@tjrightdirection.co.uk
+        </a>
+        or use the contact form below</p>
+        <form action="{% url 'contact:contact' %}" method="POST" class="contact_form" id="contact_form">
+        {% block message %}
+        {% endblock %}
+        {% if form.errors %}
+            <div class="contact_form_errors">
+                <div class="contact_form_error">{{ form.text.error }}</div>
+            </div>
+        {% endif %}
+        <table>
+            {% csrf_token %}
+            {{ form.as_table }}
+            <tr><td colspan="2"><button type="submit">Send</button></td></tr>
+        </table>
+    </form>
+{% endblock %}

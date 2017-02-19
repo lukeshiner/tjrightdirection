@@ -1,0 +1,22 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+    {% for hit_counter in hit_counters %}
+        <form action="{% url 'hitcounter:reset_trip' hit_counter.id %}">
+            <table class="hitcounter">
+                <tr>
+                    <th colspan="3">{{ hit_counter.page }}</th>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td>{{ hit_counter.total }}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Trip</td>
+                    <td>{{ hit_counter.trip }}</td>
+                    <td><input type="submit" value="Reset Trip"></td>
+            </table>
+        </form>
+    {% endfor %}
+{% endblock %}

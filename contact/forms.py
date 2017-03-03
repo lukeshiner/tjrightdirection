@@ -4,7 +4,6 @@ from tjrightdirection import settings
 import re
 
 
-NO_EMAIL_ADDRESS_MESSAGE = "Please supply a return email address"
 INVALID_EMAIL_ADDRESS_MESSAGE = "Please provide a valid email address"
 NO_NAME_MESSAGE = "Please enter your name"
 NO_SUBJECT_MESSAGE = "Please provide a subject for your message"
@@ -14,8 +13,7 @@ NO_CONTENT_MESSAGE = "Please provide a message"
 
 class ContactForm(forms.Form):
     return_email = forms.EmailField(
-        required=True, error_messages={
-            'required': NO_EMAIL_ADDRESS_MESSAGE,
+        required=False, error_messages={
             'invalid': INVALID_EMAIL_ADDRESS_MESSAGE},
         widget=forms.fields.EmailInput(
             attrs={
@@ -44,13 +42,6 @@ class ContactForm(forms.Form):
         widget=forms.Textarea(attrs={
             'placeholder': 'Your message',
             'class': 'contact_form_input'}))
-
-    def clean_contact_phone(self):
-        phone_regex = re.compile('^\+?1?\d{9,15}$')
-        number = self.cleaned_data['contact_phone']
-        if len(number) > 0 and phone_regex.match(number) is None:
-            raise forms.ValidationError(INVALID_PHONE_MESSAGE, code='invalid')
-        return number
 
     def make_message(self):
         data = self.cleaned_data

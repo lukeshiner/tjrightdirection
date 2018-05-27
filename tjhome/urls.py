@@ -1,9 +1,10 @@
-from django.conf.urls import url
+"""URLs for the tjhome app."""
 
-from . import views
+from django.urls import path
+from tjhome import views
 
 app_name = 'tjhome'
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
+    path('', views.Index.as_view(), name='index'),
 ]

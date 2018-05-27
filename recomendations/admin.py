@@ -1,11 +1,12 @@
-from django.contrib import admin
+"""Model admin for the recomendations app."""
+
 from adminsortable2.admin import SortableAdminMixin
+from django.contrib import admin
+from recomendations import models
 
-from . models import Recomendation
 
-
+@admin.register(models.Recomendation)
 class RecomendationAdmin(SortableAdminMixin, admin.ModelAdmin):
+    """Model admin for the Recomendation model."""
+
     list_display = ('name', 'address')
-
-
-admin.site.register(Recomendation, RecomendationAdmin)

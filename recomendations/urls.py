@@ -1,9 +1,10 @@
-from django.conf.urls import url
+"""URLs for the recomendations app."""
 
-from . import views
+from django.urls import path
+from recomendations import views
 
 app_name = 'recomendations'
 
 urlpatterns = [
-    url(r'^$', views.recomendations, name='recomendations'),
+    path('', views.Recomendations.as_view(), name='recomendations'),
 ]

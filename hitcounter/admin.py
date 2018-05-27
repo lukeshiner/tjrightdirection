@@ -1,10 +1,11 @@
+"""Model admin for the hitcounter app."""
+
 from django.contrib import admin
+from hitcounter import models
 
-from . models import HitCounter
 
-
+@admin.register(models.HitCounter)
 class HitCounterAdmin(admin.ModelAdmin):
+    """Model admin for the HitCounter model."""
+
     pass
-
-
-admin.site.register(HitCounter, HitCounterAdmin)

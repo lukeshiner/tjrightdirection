@@ -1,0 +1,1 @@
+"""The Hit Counter app."""

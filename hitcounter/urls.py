@@ -1,12 +1,14 @@
-from django.conf.urls import url
+"""URLs for the hitcounter app."""
+
+from django.urls import path
 
 from . import views
 
 app_name = 'hitcounter'
 
 urlpatterns = [
-    url(r'^$', views.hit_counter, name='hit_counter'),
-    url(
-        r'^reset_trip/(?P<hit_counter_id>[0-9]+)/$',
-        views.reset_trip, name='reset_trip'),
+    path('', views.HitCounter.as_view(), name='hit_counter'),
+    path(
+        'reset_trip/<int:hit_counter_id>/',
+        views.ResetTrip.as_view(), name='reset_trip'),
 ]

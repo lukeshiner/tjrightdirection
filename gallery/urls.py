@@ -1,9 +1,10 @@
-from django.conf.urls import url
+"""URLs for the gallery app."""
 
-from . import views
+from django.urls import path
+from gallery import views
 
 app_name = 'gallery'
 
 urlpatterns = [
-    url(r'^$', views.gallery, name='gallery'),
+    path('', views.Gallery.as_view(), name='gallery'),
 ]

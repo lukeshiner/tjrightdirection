@@ -4,10 +4,8 @@ Description=Gunicorn server for SITENAME
 [Service]
 Restart=on-failure
 User=lseagle
-WorkingDirectory=/home/lseagle/sites/SITENAME/source
-ExecStart=/home/lseagle/sites/SITENAME/virtualenv/bin/gunicorn \
-    --bind unix:/tmp/SITENAME.socket \
-    tjrightdirection.wsgi:application
+WorkingDirectory=/home/USERNAME/sites/SITENAME/source
+ExecStart=/bin/bash -l /home/USERNAME/sites/SITENAME/scripts/start.sh
 
 [Install]
 WantedBy=multi-user.target

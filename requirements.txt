@@ -1,5 +1,0 @@
-Django==2.0.5
-psycopg2==2.7.4
-django-admin-sortable2==0.6.19
-Pillow==5.1.0
-gunicorn==19.8.1

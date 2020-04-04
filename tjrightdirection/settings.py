@@ -158,3 +158,5 @@ STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesSto
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+CONTACT_FORM_TARGET_ADDRESS = get_config("CONTACT_FORM_TARGET_ADDRESS")

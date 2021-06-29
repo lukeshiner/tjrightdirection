@@ -66,6 +66,7 @@ EMAIL_HOST_USER = get_config("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = get_config("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = get_config("EMAIL_PORT")
 EMAIL_USE_TLS = get_config("EMAIL_USE_TLS")
+CONTACT_FORM_TARGET_ADDRESS = get_config("CONTACT_FORM_TARGET_ADDRESS")
 SERVER_EMAIL = EMAIL_HOST_USER
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
@@ -155,3 +156,34 @@ STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesSto
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+        "file": {
+            "level": "WARNING",
+            "class": "logging.FileHandler",
+            "filename": os.path.join(BASE_DIR, "logs", "error.log"),
+        },
+        "mail_admins": {
+            "level": "ERROR",
+            "class": "django.utils.log.AdminEmailHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console", "file", "mail_admins"],
+        "level": "WARNING",
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console", "file", "mail_admins"],
+            "level": "WARNING",
+            "propagate": True,
+        },
+    },
+}

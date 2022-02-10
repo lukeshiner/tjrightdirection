@@ -6,7 +6,7 @@ authors = ["Luke Shiner <luke@lukeshiner.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-Django = "2.2.26"
+Django = "2.2.27"
 psycopg2 = "^2.9.1"
 django-admin-sortable2 = "^1.0"
 Pillow = "^9.0.0"

@@ -14,7 +14,7 @@ gunicorn = "^20.1.0"
 toml = "^0.10.2"
 
 [tool.poetry.dev-dependencies]
-black = "^21.6b0"
+black = "^24.3"
 flake8 = "^3.9.2"
 isort = "^5.9.1"
 flake8-docstrings = "^1.6.0"
